@@ -1,9 +1,7 @@
 # msgpack
 
 [![Build Status](https://travis-ci.org/sc0Vu/msgpack.svg?branch=master)](https://travis-ci.org/sc0Vu/msgpack)
-
 [![Dependency Status](https://www.versioneye.com/user/projects/59298ac60546cb00422b3b66/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/59298ac60546cb00422b3b66)
-
 [![License](https://poser.pugx.org/guancheng/msgpack/license)](https://packagist.org/packages/guancheng/msgpack)
 
 The lumen api response wrapper for rybakit/msgpack.
