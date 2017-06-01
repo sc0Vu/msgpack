@@ -15,4 +15,7 @@ notifications:
     on_failure: always
 
 script:
-  -  vendor/bin/phpunit
+  -  vendor/bin/phpunit --coverage-clover=coverage.xml
+
+after_success:
+    - bash <(curl -s https://codecov.io/bash) -t 864218bc-0bf8-4f68-9cf4-61efb1dc00ed
