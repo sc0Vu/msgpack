@@ -7,10 +7,18 @@ use Symfony\Component\HttpFoundation\Response as BaseResponse;
 use Illuminate\Http\ResponseTrait;
 use MessagePack\Packer;
 use MessagePack\BufferUnpacker;
+use MessagePack\TypeTransformer\Collection;
 
 class MsgpackResponse extends BaseResponse
 {
     use ResponseTrait;
+
+    /**
+     * Transformers
+     *
+     * @var \MessagePack\TypeTransformer\Collection
+     */
+    protected $transformers;
 
     /**
      * Constructor.
@@ -24,6 +32,7 @@ class MsgpackResponse extends BaseResponse
         parent::__construct('', $status, $headers);
 
         $this->setData($data);
+        $this->transformers = new Collection([new ArrayableTransformer()]);
     }
 
     /**
@@ -35,6 +44,7 @@ class MsgpackResponse extends BaseResponse
     {
         try {
             $unpacker = new BufferUnpacker();
+            $unpacker->setTransformers($this->transformers);
             $unpacker->reset($this->data);
             $unpacked = $unpacker->unpack();
 
@@ -54,8 +64,8 @@ class MsgpackResponse extends BaseResponse
     public function setData($data = [])
     {
         $this->original = $data;
-        // $packer = new Packer(Packer::FORCE_STR);
         $packer = new Packer();
+        $packer->setTransformers($this->transformers);
 
         try {
             $this->data = $packer->pack($data);

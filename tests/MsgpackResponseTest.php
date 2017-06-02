@@ -2,6 +2,7 @@
 
 use Symfony\Component\HttpFoundation\Response;
 use LGC\Msgpack\MsgpackResponse;
+use Illuminate\Support\Collection;
 
 class MsgpackResponseTest extends PHPUnit_Framework_TestCase
 {
@@ -42,11 +43,21 @@ class MsgpackResponseTest extends PHPUnit_Framework_TestCase
     public function testSetData()
     {
         $origin = $this->response->getContent();
-        $data = $this->response->setData([
+        $response = $this->response->setData([
             'a' => 'ha'
         ]);
 
-        $this->assertNotEquals($data->getContent(), $origin);
+        $this->assertNotEquals($response->getContent(), $origin);
+
+        $collection = new Collection(['hello' => 'world']);
+        $response = $this->response->setData([
+            'collection' => $collection
+        ]);
+
+        $this->assertNotEquals($response->getContent(), $origin);
+        $this->assertEquals($response->getData(), [
+            'collection' => $collection->toArray()
+        ]);
     }
 
     /**
@@ -56,10 +67,10 @@ class MsgpackResponseTest extends PHPUnit_Framework_TestCase
      */
     public function testGetData()
     {
-        $data = $this->response->getData();
+        $response = $this->response->getData();
 
         $this->assertEquals([
             'hello' => 'lumtify'
-        ], $data);
+        ], $response);
     }
 }
