@@ -55,3 +55,8 @@ Test
 # Licence
 
 MIT
+
+## Support on Beerpay
+Hey dude! Help me out for a couple of :beers:!
+
+[![Beerpay](https://beerpay.io/sc0Vu/msgpack/badge.svg?style=beer-square)](https://beerpay.io/sc0Vu/msgpack)  [![Beerpay](https://beerpay.io/sc0Vu/msgpack/make-wish.svg?style=flat-square)](https://beerpay.io/sc0Vu/msgpack?focus=wish)
