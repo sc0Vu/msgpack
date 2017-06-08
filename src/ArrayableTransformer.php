@@ -43,7 +43,7 @@ class ArrayableTransformer implements TypeTransformer
      */
     public function supports($value)
     {
-        return $value instanceof Arrayable;
+        return method_exists($value, 'toArray') || $value instanceof Arrayable;
     }
 
     /**
